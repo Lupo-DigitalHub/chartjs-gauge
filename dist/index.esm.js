@@ -172,6 +172,8 @@ class GaugeController extends DoughnutController {
         ctx.textBaseline = 'middle';
         ctx.textAlign = 'center';
         ctx.font = font.string;
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = color.toString();
         // const { width: textWidth, actualBoundingBoxAscent, actualBoundingBoxDescent } = ctx.measureText(valueText);
         // const textHeight = actualBoundingBoxAscent + actualBoundingBoxDescent;
         const { width: textWidth } = ctx.measureText(valueText);
@@ -184,7 +186,7 @@ class GaugeController extends DoughnutController {
         // center
         let { dx, dy } = this._getTranslation();
         dx += this._getSize(offsetX);
-        dy += this._getSize(offsetY);
+        dy += this._getSize(offsetY) + 50;
         // draw
         ctx.translate(dx, dy);
         // draw background
