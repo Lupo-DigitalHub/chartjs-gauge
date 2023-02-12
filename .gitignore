@@ -1,4 +1,4 @@
-dist/**/*
+# dist/**/*
 modules/**/*
 node_modules/**/*
 temp/**/*
