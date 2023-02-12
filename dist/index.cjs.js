@@ -129,6 +129,8 @@ class GaugeController extends chart_js.DoughnutController {
         ctx.translate(dx, dy);
         ctx.rotate(angle);
         ctx.fillStyle = color;
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = color.toString();
         // draw circle
         ctx.beginPath();
         ctx.ellipse(0, 0, needleRadius, needleRadius, 0, 0, 2 * Math.PI);
@@ -137,8 +139,24 @@ class GaugeController extends chart_js.DoughnutController {
         ctx.beginPath();
         ctx.moveTo(-needleWidth / 2, 0);
         ctx.lineTo(-needleWidth / 2, -needleLength);
-        ctx.arcTo(0, -needleLength + 2, needleWidth, -needleLength, 50);
+        ctx.arcTo(0, -needleLength - (needleWidth / 2), needleWidth / 2, -needleLength, needleWidth / 2);
+        ctx.lineTo(needleWidth / 2, -needleLength);
         ctx.lineTo(needleWidth / 2, 0);
+        ctx.fill();
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = 'yellow';
+        ctx.globalCompositeOperation = 'overlay';
+        ctx.fillStyle = 'rgba(255, 255, 34, 0.3)';
+        // draw circle
+        ctx.beginPath();
+        ctx.ellipse(0, 0, needleRadius * (3 / 4), needleRadius * (3 / 4), 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(-needleWidth / 4, 0);
+        ctx.lineTo(-needleWidth / 4, -needleLength);
+        ctx.arcTo(0, -needleLength - (needleWidth), needleWidth / 4, -needleLength, needleWidth / 4);
+        ctx.lineTo(needleWidth / 4, -needleLength);
+        ctx.lineTo(needleWidth / 4, 0);
         ctx.fill();
         ctx.restore();
     }
